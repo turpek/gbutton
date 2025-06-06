@@ -3,9 +3,10 @@
 
 #include "Arduino.h"
 
-#define LONG_PRESS_TIME 500
-#define CLICK_TIME 100
-#define MULTI_CLICK_INTERVAL 300
+#define LONG_PRESS_TIME 400
+#define CLICK_TIME 150
+#define MULTI_CLICK_INTERVAL 250
+#define DEBOUCING_DELAY 50
 
 class BaseButton {
 
@@ -20,7 +21,7 @@ class BaseButton {
     bool released = false;
     unsigned int countClick = 0;
     unsigned int countMultiClick = 0;
-    unsigned long interval = 100;
+    unsigned long interval = DEBOUCING_DELAY;
     unsigned long multiClickInterval = MULTI_CLICK_INTERVAL;
     unsigned long lastTime = 0;
     unsigned long pressedTime = 0;

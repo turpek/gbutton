@@ -89,17 +89,18 @@ void BaseButton::updateState(bool state){
   }
 
   if(!isPressed() && countClick > 0 && (currentTime - lastReleaseTime) >= multiClickInterval){
-    switch(countClick){
-      case 1: singleClick = true; break;
-      case 2: doubleClick = true; break;
-      default:
-        multiClick = true;
-        countMultiClick = countClick;
-        break;
+    if(countClick == 1){
+      singleClick = true;
+    }
+    else if(countClick == 2){
+      doubleClick = true;
+    }
+    else{
+      multiClick = true;
+      countMultiClick = countClick;
     }
     countClick = 0;
   }
-  lastState = state;
 }
 
 

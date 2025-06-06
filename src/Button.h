@@ -33,8 +33,10 @@ class BaseButton {
 
     BaseButton();
     BaseButton(unsigned long interval);
-    void setLongPressedTime(unsigned long longPressTime);
-    void setInterval(unsigned long interval);
+    void setLongPressedTime(unsigned long msecs);
+    void setInterval(unsigned long msecs);
+    void setClickTime(unsigned long msecs);
+    void setMultiClickInterval(unsigned long msecs);
     bool justPressed();
     bool isClick();
     bool isDoubleClick();

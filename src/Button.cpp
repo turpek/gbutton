@@ -67,15 +67,10 @@ void BaseButton::updateState(bool state){
       released = true;
       pressed = false;
       longPressed = false;
-      justPress = false;
       lastReleaseTime = currentTime;
     }
+    lastState = state;
   }
-  else{
-    released = false;
-    justPress = false;
-  }
-
 
   if(isPressed() && (currentTime - pressedTime) >= longPressTime){
     longPressed = true;

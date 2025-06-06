@@ -52,6 +52,8 @@ void BaseButton::updateState(bool state){
   singleClick = false;
   doubleClick = false;
   multiClick = false;
+  released = false;
+  justPress = false;
   countMultiClick = 0;
 
   if((currentTime - lastTime) >= interval){
@@ -67,10 +69,6 @@ void BaseButton::updateState(bool state){
       longPressed = false;
       justPress = false;
       lastReleaseTime = currentTime;
-    }
-    else{
-      released = false;
-      justPress = false;
     }
   }
   else{

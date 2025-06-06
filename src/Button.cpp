@@ -7,12 +7,20 @@ BaseButton::BaseButton(unsigned long interval){
   setInterval(interval);
 }
 
-void BaseButton::setLongPressedTime(unsigned long longPressTime){
-  this->longPressTime = longPressTime;
+void BaseButton::setLongPressedTime(unsigned long msecs){
+  this->longPressTime = msecs;
 }
 
-void BaseButton::setInterval(unsigned long interval){
-  this->interval = interval;
+void BaseButton::setInterval(unsigned long msecs){
+  this->interval = msecs;
+}
+
+void BaseButton::setClickTime(unsigned long msecs) {
+  this->clickTime = msecs;
+}
+
+void BaseButton::setMultiClickInterval(unsigned long msecs) {
+  this->multiClickInterval = msecs;
 }
 
 bool BaseButton::justPressed(){

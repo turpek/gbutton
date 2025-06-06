@@ -49,6 +49,10 @@ unsigned int BaseButton::getCountMultiClick(){
 
 void BaseButton::updateState(bool state){
   unsigned long currentTime = millis();
+  singleClick = false;
+  doubleClick = false;
+  multiClick = false;
+  countMultiClick = 0;
 
   if((currentTime - lastTime) >= interval){
     lastTime = currentTime;
@@ -77,8 +81,7 @@ void BaseButton::updateState(bool state){
 
   if(isPressed() && (currentTime - pressedTime) >= longPressTime){
     longPressed = true;
-    singleClick = doubleClick = multiClick = false;
-    countClick = multiClick = 0;
+    countClick = 0;
   }
   else if(justReleased() && (currentTime - pressedTime) <= clickTime){
     countClick += 1;
@@ -94,12 +97,6 @@ void BaseButton::updateState(bool state){
         break;
     }
     countClick = 0;
-  }
-  else if(countClick == 0){
-    singleClick = false;
-    doubleClick = false;
-    multiClick = false;
-    countMultiClick = 0;
   }
   lastState = state;
 }

@@ -2,8 +2,6 @@
 
 Uma biblioteca simples para tratar eventos de botões do tipo *push button* no arduino, onde também resolve o problema de *bounce* via software, com essa biblioteca é possível detectar os seguintes eventos;
 
-
-
 - Botão foi pressionado (borda de descida)
 
 - Botão foi solto (borda de subida)
@@ -18,11 +16,7 @@ Uma biblioteca simples para tratar eventos de botões do tipo *push button* no a
 
 - Botão pressionado
 
-
-
-## Como usar
-
-
+### Como usar
 
 Essa biblioteca conta com a classe **`GButton`**, classe essa que expõem o estado do botão. Ela tem dois construtores o prímeiro tem a seguinte assinatura
 
@@ -30,19 +24,13 @@ Essa biblioteca conta com a classe **`GButton`**, classe essa que expõem o esta
 GButton(uint8_t pin, uint8_t mode, unsigned long interval)
 ```
 
-
-
 | Parâmetro                  | Descrição                                   |
 | -------------------------- | ------------------------------------------- |
 | *`uint8_t pin`*            | Número do pino do botão                     |
 | *`uint8_t mode`*           | Modo do botão ("*pull up*" ou "pull down" ) |
 | *`unsigned long interval`* | Intervalo de debounce                       |
 
-
-
 já o segundo construtor não tem parâmetros e a configuração é feita através do método `begin` que aceita os mesmo argumentos do construtor descrito acima, ídeal para ser usado com objeto global, com isso é possível configurar o mesmo na função `setup`, da seguinte forma
-
-
 
 ```cpp
 GButton button;
@@ -55,8 +43,6 @@ void setup() {
 }
 ```
 
-
-
 o método **`update()`** atualiza o estado do botão, é aconselhavel chama-lo uma vez no setup, para atualizar os atributos que dependem do tempo corretamente.  Para a leitura do estado do botão é fornecido os seguintes métodos
 
 | Método                            | Descrição                                                                                                                             |
@@ -68,11 +54,9 @@ o método **`update()`** atualiza o estado do botão, é aconselhavel chama-lo u
 | *`isDoubleClick()`*               | Retorna verdadeiro para o caso em que o botão foi clicado duas vezes dentro do intervalo definido como clique.                        |
 | *`isMultiClick()`*                | Retorna verdadeiro para o caso em que o botão foi clicado ***N*** vezes, onde *`N > 2`*.                                              |
 | *`bool isLongPressed()`*          | Retorna verdadeiro se um botão foi pressionado durante o intervalo de tempo necessário para ser considerado um "precionamento longo". |
-| *`unsigned getCountMultiClick()`* | Retorna o número de vezes em que o  botão foi clicado, no caso se  *`isMultiClick`* for verdadeiro.                                   |
+| *`unsigned getCountMultiClick()`* | Retorna o número de vezes em que o  botão foi clicado, no caso se  *`isMultiClick()`* for verdadeiro.                                 |
 
 também é possível definir alguns valores para tornar o objeto mais dinâmico, sendo eles
-
-
 
 | Método                                              | Descrição                                                                                                                                                 |
 | --------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -82,9 +66,7 @@ também é possível definir alguns valores para tornar o objeto mais dinâmico,
 | *`void setMultiClickInterval(unsigned long msecs)`* | Tempo máximo  para ocorrer o clique *`N+1`*, caso não ocorra a ação é considerada como um clique *`N`*.                                                   |
 | `void setPressedState(uint8_t state)`               | Define se a ação de pressionar o botão é `LOW` ou `HIGH`.                                                                                                 |
 
-
-
-## Exemplo rápido
+### Exemplo rápido
 
 Configura o botão no pino 4 com INPUT_PULLUP e debounce de 50 ms, e um LED no pino 5 como saída.  No loop, chama botao.update() e pisca o LED por 150 ms sempre que um clique simples é detectado.
 
@@ -113,17 +95,9 @@ void loop() {
 }
 ```
 
+### Exemplo didático
 
-
-
-
-## Exemplo didático
-
-
-
-Considere um  botão no modo *pull up*  conectado ao pino 4 e dois LEDS, um *LED* conectado no pino 5 do arduino no modo *pull up* e outro LED conectado no pino 6, também no mesmo modo, vamos usar o LED do pino 4 para contar a quantidade de vezes que o botão foi clicado (no caso do botão ser pressionado por um longo tempo o LED deve ficar asceso até o mesmo ser liberado), já o LED do pino 5, deve ascender na borda de descida, e apagar na borda de descida, na borda de descida devemos apagar o LED do pino 4 também, para tratar o caso do botão pressionado. 
-
-
+Considere um  botão no modo *pull up*  conectado ao pino 4 e dois LEDS, um *LED* conectado no pino 5 do arduino no modo *pull up* e outro LED conectado no pino 6, também no mesmo modo, vamos usar o LED do pino 5 para contar a quantidade de vezes que o botão foi clicado (no caso do botão ser pressionado por um longo tempo o LED deve ficar asceso até o mesmo ser liberado), já o LED do pino 6, deve ascender na borda de descida, e apagar na borda de descida, na borda de descida devemos apagar o LED do pino 5 também, para tratar o caso do botão pressionado. 
 
 ```cpp
 #include "GButton.h"
@@ -148,16 +122,16 @@ void setup() {
 
   pinMode(PIN_LED_1, OUTPUT);
   pinMode(PIN_LED_2, OUTPUT);
-  
+
   botao.begin(PIN_BUTTON, INPUT_PULLUP, 50);
-  
+
   // Define o intervalo de tempo máximo para identificar um clique.
   botao.setClickTime(200);
 
   // Define o tempo de espera para identificar um proximo clique
   // Caso falhe o estado atual é consolidado.
   botao.setMultiClickInterval(300);
-  
+
   // Define o tempo mínimo para o pressionamento longo.
   botao.setLongPressedTime(600);
 }

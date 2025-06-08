@@ -6,7 +6,7 @@ Uma biblioteca simples para tratar eventos de botões do tipo *push button* no a
 
 - Botão foi solto (borda de subida)
 
-- Botão está precionado
+- Botão está pressionado
 
 - Um clique
 
@@ -53,7 +53,7 @@ o método **`update()`** atualiza o estado do botão, é aconselhavel chama-lo u
 | *`isClick()`*                     | Retorna verdadeiro se o botão foi clicado uma vez dentro do intervalo definido como clique.                                           |
 | *`isDoubleClick()`*               | Retorna verdadeiro para o caso em que o botão foi clicado duas vezes dentro do intervalo definido como clique.                        |
 | *`isMultiClick()`*                | Retorna verdadeiro para o caso em que o botão foi clicado ***N*** vezes, onde *`N > 2`*.                                              |
-| *`bool isLongPressed()`*          | Retorna verdadeiro se um botão foi pressionado durante o intervalo de tempo necessário para ser considerado um "precionamento longo". |
+  | *`bool isLongPressed()`*          | Retorna verdadeiro se um botão foi pressionado durante o intervalo de tempo necessário para ser considerado um "pressionamento longo". |
 | *`unsigned getCountMultiClick()`* | Retorna o número de vezes em que o  botão foi clicado, no caso se  *`isMultiClick()`* for verdadeiro.                                 |
 
 também é possível definir alguns valores para tornar o objeto mais dinâmico, sendo eles
@@ -97,7 +97,7 @@ void loop() {
 
 ### Exemplo didático
 
-Considere um  botão no modo *pull up*  conectado ao pino 4 e dois LEDS, um *LED* conectado no pino 5 do arduino no modo *pull up* e outro LED conectado no pino 6, também no mesmo modo, vamos usar o LED do pino 5 para contar a quantidade de vezes que o botão foi clicado (no caso do botão ser pressionado por um longo tempo o LED deve ficar asceso até o mesmo ser liberado), já o LED do pino 6, deve ascender na borda de descida, e apagar na borda de descida, na borda de descida devemos apagar o LED do pino 5 também, para tratar o caso do botão pressionado. 
+Considere um  botão no modo *pull up*  conectado ao pino 4 e dois LEDS, um *LED* conectado no pino 5 do arduino no modo *pull up* e outro LED conectado no pino 6, também no mesmo modo, vamos usar o LED do pino 5 para contar a quantidade de vezes que o botão foi clicado (no caso do botão ser pressionado por um longo tempo o LED deve ficar asceso até o mesmo ser liberado), já o LED do pino 6, deve ascender na borda de descida, e apagar na borda de descida, na borda de descida devemos apagar o LED do pino 5 também, para tratar o caso do botão pressionado.
 
 ```cpp
 #include "GButton.h"
@@ -162,7 +162,7 @@ void loop() {
   }
   else if(botao.justReleased()) {
     // Borda de subida, ou seja, o botão foi solto portanto
-    // apagamos o LED 2, também apagamos o LED 1, para o caso 
+    // apagamos o LED 2, também apagamos o LED 1, para o caso
     // de o botão ser pressionado por um longo tempo
     delay(50);
     digitalWrite(PIN_LED_2, LOW);
@@ -171,7 +171,7 @@ void loop() {
 
   if (botao.isLongPressed()) {
     // Ascendemos o LED 1 durante o tempo em que o botão ficar
-    // pressionado no estado de "pressionamento longo" 
+    // pressionado no estado de "pressionamento longo"
     digitalWrite(PIN_LED_1, HIGH);
   }
 }

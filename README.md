@@ -45,16 +45,17 @@ void setup() {
 
 o método **`update()`** atualiza o estado do botão, é aconselhavel chama-lo uma vez no setup, para atualizar os atributos que dependem do tempo corretamente.  Para a leitura do estado do botão é fornecido os seguintes métodos
 
-| Método                            | Descrição                                                                                                                             |
-| --------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------- |
-| *`void update()`*                 | Atualiza o estado do botão.                                                                                                           |
-| *`bool justPressed()`*            | Retorna verdadeiro na borda de descida, ou seja, identifica o momento que o botão foi pressionado.                                    |
-| *`bool justReleased()`*           | Retorna verdadeiro na borda de subida, ou seja, determina o momento em que o botão foi solto.                                         |
-| *`isClick()`*                     | Retorna verdadeiro se o botão foi clicado uma vez dentro do intervalo definido como clique.                                           |
-| *`isDoubleClick()`*               | Retorna verdadeiro para o caso em que o botão foi clicado duas vezes dentro do intervalo definido como clique.                        |
-| *`isMultiClick()`*                | Retorna verdadeiro para o caso em que o botão foi clicado ***N*** vezes, onde *`N > 2`*.                                              |
-  | *`bool isLongPressed()`*          | Retorna verdadeiro se um botão foi pressionado durante o intervalo de tempo necessário para ser considerado um "pressionamento longo". |
-| *`unsigned getCountMultiClick()`* | Retorna o número de vezes em que o  botão foi clicado, no caso se  *`isMultiClick()`* for verdadeiro.                                 |
+| Método                            | Descrição                                                                                                                              |
+| --------------------------------- | -------------------------------------------------------------------------------------------------------------------------------------- |
+| *`void update()`*                 | Atualiza o estado do botão.                                                                                                            |
+| *`bool isPressed()`*              | Retorna verdadeiro enquanto o botão estiver pressionado.                                                                               |
+| *`bool justPressed()`*            | Retorna verdadeiro na borda de descida, ou seja, identifica o momento que o botão foi pressionado.                                     |
+| *`bool justReleased()`*           | Retorna verdadeiro na borda de subida, ou seja, determina o momento em que o botão foi solto.                                          |
+| *`isClick()`*                     | Retorna verdadeiro se o botão foi clicado uma vez dentro do intervalo definido como clique.                                            |
+| *`isDoubleClick()`*               | Retorna verdadeiro para o caso em que o botão foi clicado duas vezes dentro do intervalo definido como clique.                         |
+| *`isMultiClick()`*                | Retorna verdadeiro para o caso em que o botão foi clicado ***N*** vezes, onde *`N > 2`*.                                               |
+| *`bool isLongPressed()`*          | Retorna verdadeiro se um botão foi pressionado durante o intervalo de tempo necessário para ser considerado um "pressionamento longo". |
+| *`unsigned getCountMultiClick()`* | Retorna o número de vezes em que o  botão foi clicado, no caso se  *`isMultiClick()`* for verdadeiro.                                  |
 
 também é possível definir alguns valores para tornar o objeto mais dinâmico, sendo eles
 
@@ -97,7 +98,7 @@ void loop() {
 
 ### Exemplo didático
 
-Considere um  botão no modo *pull up*  conectado ao pino 4 e dois LEDS, um *LED* conectado no pino 5 do arduino no modo *pull up* e outro LED conectado no pino 6, também no mesmo modo, vamos usar o LED do pino 5 para contar a quantidade de vezes que o botão foi clicado (no caso do botão ser pressionado por um longo tempo o LED deve ficar asceso até o mesmo ser liberado), já o LED do pino 6, deve ascender na borda de descida, e apagar na borda de descida, na borda de descida devemos apagar o LED do pino 5 também, para tratar o caso do botão pressionado.
+Considere um  botão no modo *pull up*  conectado ao pino 4 e dois LEDS, um *LED* conectado no pino 5 do arduino no modo *pull up* e outro LED conectado no pino 6, também no mesmo modo, vamos usar o LED do pino 5 para contar a quantidade de vezes que o botão foi clicado (no caso do botão ser pressionado por um longo tempo o LED deve ficar aceso até o mesmo ser liberado), já o LED do pino 6, deve acender na borda de descida, e apagar na borda de descida, na borda de descida devemos apagar o LED do pino 5 também, para tratar o caso do botão pressionado.
 
 ```cpp
 #include "GButton.h"
@@ -156,7 +157,7 @@ void loop() {
 
   if(botao.justPressed()){
     // Borda de descida, ou seja o botão foi prossionado
-    // então ascendemos o LED 2
+    // então acendemos o LED 2
     digitalWrite(PIN_LED_2, HIGH);
 
   }
@@ -170,9 +171,11 @@ void loop() {
   }
 
   if (botao.isLongPressed()) {
-    // Ascendemos o LED 1 durante o tempo em que o botão ficar
+    // Acendemos o LED 1 durante o tempo em que o botão ficar
     // pressionado no estado de "pressionamento longo"
     digitalWrite(PIN_LED_1, HIGH);
   }
 }
 ```
+
+*Este exemplo utiliza a função  `delay()` para criar um efeito visual mais perceptível, mas tenha em mente que `delay()` bloqueia a execução do código. Em projetos mais complexos, o uso de `delay()` pode interferir na capacidade da biblioteca de detectar eventos do botão em tempo real. Para esses casos, considere usar abordagens não-bloqueantes, como a função `millis()`, para controlar o tempo.*

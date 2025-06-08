@@ -104,7 +104,9 @@ void BaseButton::updateState(bool state){
 }
 
 
-GButton::GButton(){};
+GButton::GButton(){
+  setInterval(DEBOUCING_DELAY);
+};
 
 GButton::GButton(uint8_t pin, uint8_t mode, unsigned long interval)
   : BaseButton::BaseButton() {

@@ -9,7 +9,7 @@ BIN_DIR  = bin
 
 # Arquivos-fonte
 UNITY_SRC  = $(UNITY_DIR)/unity.cpp
-BUTTON_SRC = $(SRC_DIR)/Button.cpp
+BUTTON_SRC = $(SRC_DIR)/GButton.cpp
 TEST_SRC   = $(TEST_DIR)/test_button.cpp
 
 # Executáveis

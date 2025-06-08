@@ -1,4 +1,4 @@
-#include "Button.h"
+#include "GButton.h"
 
 
 BaseButton::BaseButton(){};
@@ -104,24 +104,24 @@ void BaseButton::updateState(bool state){
 }
 
 
-Button::Button(){};
+GButton::GButton(){};
 
-Button::Button(uint8_t pin, uint8_t mode, unsigned long interval)
+GButton::GButton(uint8_t pin, uint8_t mode, unsigned long interval)
   : BaseButton::BaseButton() {
     begin(pin, mode, interval);
 }
 
-void Button::begin(uint8_t pin, uint8_t mode, unsigned long interval){
+void GButton::begin(uint8_t pin, uint8_t mode, unsigned long interval){
   this->pin = pin;
   this->mode = mode;
   pinMode(pin, mode);
   setInterval(interval);
 }
 
-void Button::setPressedState(uint8_t state){
+void GButton::setPressedState(uint8_t state){
   pressedLevel = state;
 }
 
-void Button::update(){
+void GButton::update(){
   updateState(digitalRead(this->pin) == pressedLevel);
 }

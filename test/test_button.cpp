@@ -1,6 +1,6 @@
 #include "Arduino.h"
 #include "unity.h"
-#include "Button.h"
+#include "GButton.h"
 #include "unity_internals.h"
 #include <climits>
 
@@ -15,20 +15,20 @@ void setUp(void){
 void tearDown(void){}
 
 void test_button_pressed_false(){
-  Button button = Button(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
+ GButton button =GButton(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
   button.update();
   TEST_ASSERT_FALSE(button.isPressed());
 }
 
 void test_button_pressed_false_deboucing_elapsed(){
-  Button button = Button(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
+ GButton button =GButton(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
   current_time = DEBOUCING_DELAY;
   button.update();
   TEST_ASSERT_FALSE(button.isPressed());
 }
 
 void test_button_pressed_false_no_deboucing_elapsed_with_digitalRead_LOW(){
-  Button button = Button(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
+ GButton button =GButton(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
   pin_values[PIN] = LOW;
   current_time = DEBOUCING_DELAY - 1;
   button.update();
@@ -36,7 +36,7 @@ void test_button_pressed_false_no_deboucing_elapsed_with_digitalRead_LOW(){
 }
 
 void test_button_pressed_true(){
-  Button button = Button(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
+ GButton button =GButton(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
   pin_values[PIN] = LOW;
   current_time = DEBOUCING_DELAY;
   button.update();
@@ -44,7 +44,7 @@ void test_button_pressed_true(){
 }
 
 void test_button_longpressed_false_digitalRead_HIGH(){
-  Button button = Button(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
+ GButton button =GButton(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
   pin_values[PIN] = LOW;
   current_time = DEBOUCING_DELAY;
   button.update();
@@ -55,7 +55,7 @@ void test_button_longpressed_false_digitalRead_HIGH(){
 }
 
 void test_button_longpressed_false_digitalRead_HIGH_longtime_no_elapsed(){
-  Button button = Button(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
+ GButton button =GButton(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
   pin_values[PIN] = LOW;
   current_time = DEBOUCING_DELAY;
   button.update();
@@ -66,7 +66,7 @@ void test_button_longpressed_false_digitalRead_HIGH_longtime_no_elapsed(){
 }
 
 void test_button_longpressed_false_digitalRead_LOW_longtime_no_elapsed(){
-  Button button = Button(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
+ GButton button =GButton(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
   pin_values[PIN] = LOW;
   current_time = DEBOUCING_DELAY;
   button.update();
@@ -76,7 +76,7 @@ void test_button_longpressed_false_digitalRead_LOW_longtime_no_elapsed(){
 }
 
 void test_button_longpressed_true_digitalRead_LOW(){
-  Button button = Button(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
+ GButton button =GButton(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
   pin_values[PIN] = LOW;
   current_time = DEBOUCING_DELAY;
   button.update();
@@ -86,14 +86,14 @@ void test_button_longpressed_true_digitalRead_LOW(){
 }
 
 void test_button_released_false_digitalRead_HIGH_time_deboucing_no_elapsed(){
-  Button button = Button(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
+ GButton button =GButton(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
   current_time = DEBOUCING_DELAY - 1;
   button.update();
   TEST_ASSERT_FALSE(button.justReleased());
 }
 
 void test_button_released_false_digitalRead_HIGH_time_deboucing_elapsed(){
-  Button button = Button(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
+ GButton button =GButton(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
   current_time = DEBOUCING_DELAY;
   button.update();
   TEST_ASSERT_FALSE(button.justReleased());
@@ -101,7 +101,7 @@ void test_button_released_false_digitalRead_HIGH_time_deboucing_elapsed(){
 
 
 void test_button_released_false_digitalRead_LOW_time_deboucing_elapsed(){
-  Button button = Button(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
+ GButton button =GButton(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
   pin_values[PIN] = LOW;
   current_time = DEBOUCING_DELAY;
   button.update();
@@ -109,7 +109,7 @@ void test_button_released_false_digitalRead_LOW_time_deboucing_elapsed(){
 }
 
 void test_button_released_true_after_pressed(){
-  Button button = Button(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
+ GButton button =GButton(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
   pin_values[PIN] = LOW;
   current_time = DEBOUCING_DELAY;
   button.update();
@@ -121,7 +121,7 @@ void test_button_released_true_after_pressed(){
 }
 
 void test_button_released_true_after_longPressed(){
-  Button button = Button(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
+ GButton button =GButton(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
   pin_values[PIN] = LOW;
   current_time = DEBOUCING_DELAY;
   button.update();
@@ -136,7 +136,7 @@ void test_button_released_true_after_longPressed(){
 }
 
 void test_button_released_true_after_click_case_1(){
-  Button button = Button(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
+ GButton button =GButton(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
   pin_values[PIN] = LOW;
   current_time = DEBOUCING_DELAY;
   button.update();
@@ -150,7 +150,7 @@ void test_button_released_true_after_click_case_1(){
 }
 
 void test_button_released_true_after_click_case_2(){
-  Button button = Button(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
+ GButton button =GButton(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
   pin_values[PIN] = LOW;
   current_time = DEBOUCING_DELAY;
   button.update();
@@ -166,7 +166,7 @@ void test_button_released_true_after_click_case_2(){
 }
 
 void test_button_released_false_after_released_digitalRead_HIGH_time_elapsed(){
-  Button button = Button(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
+ GButton button =GButton(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
   pin_values[PIN] = LOW;
   current_time = DEBOUCING_DELAY;
   button.update();
@@ -183,7 +183,7 @@ void test_button_released_false_after_released_digitalRead_HIGH_time_elapsed(){
 }
 
 void test_button_released_false_after_released_digitalRead_HIGH_time_no_elapsed(){
-  Button button = Button(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
+ GButton button =GButton(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
   pin_values[PIN] = LOW;
   current_time = DEBOUCING_DELAY;
   button.update();
@@ -200,7 +200,7 @@ void test_button_released_false_after_released_digitalRead_HIGH_time_no_elapsed(
 }
 
 void test_button_justPressed_false_digitalRead_HIGH_time_no_elapsed(){
-  Button button = Button(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
+ GButton button =GButton(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
   current_time = DEBOUCING_DELAY - 1;
   button.update();
   TEST_ASSERT_FALSE(button.justPressed());
@@ -208,14 +208,14 @@ void test_button_justPressed_false_digitalRead_HIGH_time_no_elapsed(){
 
 
 void test_button_justPressed_false_digitalRead_HIGH_time_elapsed(){
-  Button button = Button(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
+ GButton button =GButton(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
   current_time = DEBOUCING_DELAY;
   button.update();
   TEST_ASSERT_FALSE(button.justPressed());
 }
 
 void test_button_justPressed_false_digitalRead_LOW_time_no_elapsed(){
-  Button button = Button(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
+ GButton button =GButton(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
   current_time = DEBOUCING_DELAY - 1;
   pin_values[PIN] = LOW;
   button.update();
@@ -223,7 +223,7 @@ void test_button_justPressed_false_digitalRead_LOW_time_no_elapsed(){
 }
 
 void test_button_justPressed_true_digitalRead_LOW_time_elapsed(){
-  Button button = Button(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
+ GButton button =GButton(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
   current_time = DEBOUCING_DELAY;
   pin_values[PIN] = LOW;
   button.update();
@@ -231,7 +231,7 @@ void test_button_justPressed_true_digitalRead_LOW_time_elapsed(){
 }
 
 void test_button_justPressed_false_digitalRead_LOW_after_click_true_time_elapsed(){
-  Button button = Button(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
+ GButton button =GButton(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
   current_time = DEBOUCING_DELAY;
   pin_values[PIN] = LOW;
   button.update();
@@ -243,7 +243,7 @@ void test_button_justPressed_false_digitalRead_LOW_after_click_true_time_elapsed
 }
 
 void test_button_justPressed_false_digitalRead_LOW_after_click_true_time_no_elapsed(){
-  Button button = Button(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
+ GButton button =GButton(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
   current_time = DEBOUCING_DELAY;
   pin_values[PIN] = LOW;
   button.update();
@@ -255,7 +255,7 @@ void test_button_justPressed_false_digitalRead_LOW_after_click_true_time_no_elap
 }
 
 void test_button_click_false_digitalRead_HIGH_time_no_elapsed(){
-  Button button = Button(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
+ GButton button =GButton(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
   current_time = DEBOUCING_DELAY - 1;
   pin_values[PIN] = HIGH;
   button.update();
@@ -263,7 +263,7 @@ void test_button_click_false_digitalRead_HIGH_time_no_elapsed(){
 }
 
 void test_button_click_false_digitalRead_LOW_time_no_elapsed(){
-  Button button = Button(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
+ GButton button =GButton(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
   current_time = DEBOUCING_DELAY - 1;
   pin_values[PIN] = LOW;
   button.update();
@@ -271,7 +271,7 @@ void test_button_click_false_digitalRead_LOW_time_no_elapsed(){
 }
 
 void test_button_click_false_digitalRead_HIGH_time_elapsed(){
-  Button button = Button(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
+ GButton button =GButton(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
   current_time = DEBOUCING_DELAY;
   pin_values[PIN] = HIGH;
   button.update();
@@ -279,7 +279,7 @@ void test_button_click_false_digitalRead_HIGH_time_elapsed(){
 }
 
 void test_button_click_false_digitalRead_LOW_time_elapsed(){
-  Button button = Button(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
+ GButton button =GButton(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
   current_time = DEBOUCING_DELAY;
   pin_values[PIN] = LOW;
   button.update();
@@ -287,7 +287,7 @@ void test_button_click_false_digitalRead_LOW_time_elapsed(){
 }
 
 void test_button_click_false_after_release_ClickTime_elapsed(){
-  Button button = Button(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
+ GButton button =GButton(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
   current_time = DEBOUCING_DELAY;
   pin_values[PIN] = LOW;
   button.update();
@@ -303,7 +303,7 @@ void test_button_click_false_after_release_ClickTime_elapsed(){
 }
 
 void test_button_click_false_after_release_multiClickInterval_no_elapsed(){
-  Button button = Button(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
+ GButton button =GButton(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
   current_time = DEBOUCING_DELAY;
   pin_values[PIN] = LOW;
   button.update();
@@ -319,7 +319,7 @@ void test_button_click_false_after_release_multiClickInterval_no_elapsed(){
 }
 
 void test_button_click_true_after_release_multiClickInterval_elapsed(){
-  Button button = Button(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
+ GButton button =GButton(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
   current_time = DEBOUCING_DELAY;
   pin_values[PIN] = LOW;
   button.update();
@@ -335,7 +335,7 @@ void test_button_click_true_after_release_multiClickInterval_elapsed(){
 }
 
 void test_button_click_false_after_singleClick(){
-  Button button = Button(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
+ GButton button =GButton(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
   current_time = DEBOUCING_DELAY;
   pin_values[PIN] = LOW;
   button.update();
@@ -354,7 +354,7 @@ void test_button_click_false_after_singleClick(){
 }
 
 void test_button_doubleClick_false_after_click_clickTime_elapsed(){
-  Button button = Button(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
+ GButton button =GButton(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
 
   // Gerando um click
   current_time = DEBOUCING_DELAY;
@@ -386,7 +386,7 @@ void test_button_doubleClick_false_after_click_clickTime_elapsed(){
 }
 
 void test_button_doubleClick_false_after_click_multiClickInterval_no_elapsed(){
-  Button button = Button(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
+ GButton button =GButton(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
 
   // Gerando um click
   current_time = DEBOUCING_DELAY;
@@ -417,7 +417,7 @@ void test_button_doubleClick_false_after_click_multiClickInterval_no_elapsed(){
 
 
 void test_button_doubleClick_true(){
-  Button button = Button(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
+ GButton button =GButton(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
 
   // Gerando um click
   current_time = DEBOUCING_DELAY;
@@ -448,7 +448,7 @@ void test_button_doubleClick_true(){
 
 
 void test_button_multiClick_false_clickTime_elapsed(){
-  Button button = Button(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
+ GButton button =GButton(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
 
   // Gerando um click
   current_time = DEBOUCING_DELAY;
@@ -491,7 +491,7 @@ void test_button_multiClick_false_clickTime_elapsed(){
 }
 
 void test_button_multiClick_false_multiClickInterval_no_elapsed(){
-  Button button = Button(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
+ GButton button =GButton(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
 
   // Gerando um click
   current_time = DEBOUCING_DELAY;
@@ -534,7 +534,7 @@ void test_button_multiClick_false_multiClickInterval_no_elapsed(){
 
 void test_button_multiClick_true(){
   int expect_count_click = 3;
-  Button button = Button(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
+ GButton button =GButton(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
 
   // Gerando um click
   current_time = DEBOUCING_DELAY;
@@ -579,7 +579,7 @@ void test_button_multiClick_true(){
 
 void test_button_multiClick_true_4_clicks(){
   int expect_count_click = 4;
-  Button button = Button(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
+ GButton button =GButton(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
 
   // Gerando um click
   current_time = DEBOUCING_DELAY;
@@ -636,7 +636,7 @@ void test_button_multiClick_true_4_clicks(){
 
 
 void test_button_multiClick_false_before_longPress(){
-  Button button = Button(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
+ GButton button =GButton(PIN, INPUT_PULLUP, DEBOUCING_DELAY);
 
   // Gerando um click
   current_time = DEBOUCING_DELAY;

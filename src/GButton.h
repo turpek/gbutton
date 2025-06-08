@@ -1,5 +1,5 @@
-#ifndef BUTTON_H
-#define BUTTON_H
+#ifndef GBUTTON_H
+#define GBUTTON_H
 
 #include "Arduino.h"
 
@@ -52,15 +52,15 @@ class BaseButton {
 };
 
 
-class Button: public BaseButton {
+class GButton: public BaseButton {
   private:
     uint8_t pin;
     uint8_t mode;
     int pressedLevel = LOW;
 
   public:
-    Button();
-    Button(uint8_t pin, uint8_t mode, unsigned long interval);
+    GButton();
+    GButton(uint8_t pin, uint8_t mode, unsigned long interval);
     void begin(uint8_t pin, uint8_t mode, unsigned long interval);
     void setPressedState(uint8_t state);
     void update();
